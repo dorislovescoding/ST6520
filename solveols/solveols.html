@@ -193,14 +193,32 @@ $(document).ready(function () {
 </div>
 
 
-<div id="solve-for-linear-equation-solveols" class="section level2">
-<h2>Solve for linear Equation (solveols)</h2>
+<div id="solve-for-linear-equation" class="section level2">
+<h2>Solve for linear Equation</h2>
 <p>Here the objective function is <span class="math inline">\(Ax=b\)</span> and we would like to solve for x using Gauss-Seidel, Jacobi or Parellel Jacobi. The function is in the following form:</p>
 <p><code>solveols(A, b, iter, type ='GS', c=1)</code></p>
 <p>Here A needs to be invertible.</p>
 <p>Type can be defined as “GS” or “Jacobi”</p>
 <p>The variable <code>c</code> determines the number of cores to be used in the parallel realization of Jacobi methods and the default is 1.</p>
-<p>Here we need to make sure that Gauss-Seidel or Jacobi converge. Otherwise, after many iternation it would show the maximum number.</p>
+<p>Here we need to make sure that Gauss-Seidel or Jacobi converge. Otherwise, after many iternation it would show the maximum number written in the code.</p>
+<p>When you need to do parallel computing, please library doParallel first.</p>
+<p>The following is an example:</p>
+<pre><code>n=100
+A=matrix(data=0 , nrow=n , ncol=n)
+for (i in 1 : 99)
+  { j=i+1
+A[i,j]=-1
+A[j,i]=-1
+}
+Diag(A)=2 
+
+b=matrix(0,nrow=100, ncol=1)
+s=seq(from=1, to=100, by=2)
+b[s]=1
+
+
+x_GS=solveols(A, b, iter=100, type ='GS', c=1)
+x_JC=solveols(A, b, iter=100, type ='Jacobi', c=2)</code></pre>
 </div>
 
 
