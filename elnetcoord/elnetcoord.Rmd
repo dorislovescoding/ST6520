@@ -1,0 +1,49 @@
+---
+title: "elnetcoord"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Coordinate descent for elastic net
+
+Here we use coordinate descent method to solve for elastic net which is a combination of L1 and L2 norm penalty.
+
+$$
+L = \frac{1}{n} \|Y - X\beta\|_2^2 + \lambda [(1 - \alpha) \|\beta\|_2^2 + \alpha \|\beta\|_1].
+$$
+
+My function is as follows:
+
+`elnetcoord(x, y, tol, alpha, lambdagrid)`
+
+X and y are covariates and depend variables one would like to use.
+
+tol defines the tolerance level of each loop given $\lambda$ and $\alpha$
+
+alpha is the relative weight on L2 norm because lasso has a property of dropping highly correlated covariates.
+
+lambdagrid allows people to define the finess of grid that they would like to search for lambda.
+
+The final output is a matrix of beta for different lambda and one can choose the best lambda with smallest MSE or other criterion. Or one can plot the beta against lambda to see the change when the restriction on coefficient is gradually removed.
+
+
+Following are a few examples of how to use the function:
+
+```{}
+data <- rep(0, 10) 
+beta <-array(data,c(10))
+beta[1]=2
+beta[3]=-2
+beta[5]=1
+beta[7]=-1
+e=rnorm(100,mean=0,sd=1)
+X = matrix(rnorm(10 * 100), nrow = 100)
+y=X%*%beta+e
+beta_a=elnetcoord(X,y,1e-10,alpha=0.5,lambdagrid=1000)
+beta_b=elnetcoord(X,y,1e-10,alpha=0.3,lambdagrid=10000)
+```
+
+
