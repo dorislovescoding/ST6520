@@ -11,18 +11,15 @@ solveols(A, b, iter, c = 1, type = "GS")
 
 \item{b}{Vector. Its dimension should match that of matrix \code{A}.}
 
-\item{iter}{Number of iterations in the calculation.
-'Jacobi' means Jacobi. Default is 'GS'.}
+\item{iter}{Number of iterations in the calculation.}
 
 \item{c}{Number of cores used in parallel computation.}
 
-\item{type}{Type of iteration method, 'GS' means Gauss-Seidel,}
-
-\item{iter}{Number of iterations in the calculation. Default is 1000.}
+\item{type}{Type of iteration method, 'GS' means Gauss-Seidel and "Jacobi" for Jacobi}
 }
 \value{
 The solution vector \code{x} for linear system \code{Ax = b}.
 }
 \description{
-Solve linear system \code{Ax = b} using iteration methods Jacobi.
+Solve linear system \code{Ax = b} using iteration methods Jacobi, Gauss Seidl and parallel Jacobi.
 }
