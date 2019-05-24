@@ -14,10 +14,10 @@ elnetcoord(x, y, tol, alpha, lambdagrid)
 \item{tol}{Tolerance error between two adjacent coordinate descent iterations.
 Computed by \code{norm(new.beta - old.beta)}.}
 
-\item{lambdagrid}{Specify the grid to find the most desirable lambda}
-
-\item{\alpha}{Parameter in \code{[0,1]} specifying the relative weight between L1 penalty
+\item{alpha}{Parameter in \code{[0,1]} specifying the relative weight between L1 penalty
 and L2 penalty.}
+
+\item{lambdagrid}{Specify the grid to find the most desirable lambda}
 }
 \description{
 Solve the elastic net regression problem.

@@ -4,7 +4,7 @@
 #'
 #' @param x Covariate matrix of \code{n} by \code{p}.
 #' @param y The depend variable, would be demeaned in the algorithm
-#' @param \alpha Parameter in \code{[0,1]} specifying the relative weight between L1 penalty
+#' @param alpha Parameter in \code{[0,1]} specifying the relative weight between L1 penalty
 #' and L2 penalty.
 #' @param tol Tolerance error between two adjacent coordinate descent iterations.
 #' Computed by \code{norm(new.beta - old.beta)}.
