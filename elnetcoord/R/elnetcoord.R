@@ -4,7 +4,7 @@
 #'
 #' @param x Covariate matrix of \code{n} by \code{p}.
 #' @param y The depend variable, would be demeaned in the algorithm
-#' @param alpha Parameter in \code{[0,1]} specifying the relative weight between L1 penalty
+#' @param \alpha Parameter in \code{[0,1]} specifying the relative weight between L1 penalty
 #' and L2 penalty.
 #' @param tol Tolerance error between two adjacent coordinate descent iterations.
 #' Computed by \code{norm(new.beta - old.beta)}.
@@ -18,7 +18,7 @@
 elnetcoord <- function(x,y,tol,alpha,lambdagrid) {
 
 
-  y=y-y(mean)
+  y=y-mean(y)
   p=ncol(x)
 
 
@@ -46,7 +46,7 @@ elnetcoord <- function(x,y,tol,alpha,lambdagrid) {
         # soft-threshold solution
         xr = sum(x[,j]*r)
         xx = sum(x[,j]^2)
-        b[j] = (abs(xr)-lambda[l]*alpha[3])/(xx+lambda[l]*(1-alpha[3]))
+        b[j] = (abs(xr)-lambda[l]*alpha)/(xx+lambda[l]*(1-alpha))
         b[j] = sign(xr)*ifelse(b[j]>0,b[j],0)
 
         # residuals
@@ -59,5 +59,5 @@ elnetcoord <- function(x,y,tol,alpha,lambdagrid) {
     iter_cd[l]=iter
     beta_cd[l,]<-b
   }
-  pct <- rowSums(abs(beta_cd))
+  beta_cd
 }
