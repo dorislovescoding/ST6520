@@ -9,7 +9,11 @@ install_github("dorislovescoding/ST6520/~")
 
 library(~)
 
-replace ~ with algoleverage elnetcoord or solveols
+replace ~ with algoleverage, elnetcoord or solveols
+
+To read the vignette, using the command:
+
+vignette('~')
 
 
 
