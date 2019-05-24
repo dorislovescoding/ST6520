@@ -1,0 +1,38 @@
+---
+title: "algoleverage"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Algoleverage
+
+Here we can use either an uniform weighting matrix or a leverage weighting matrix together with subsampling to reduce the computaion cost in ordinary least square regression.
+
+Here the objective function is $y=\beta x + \epsilon$ and we would like to solve for x and the function is in the following form:
+
+`algoleverage(X, y, samplesize, Type ='Uniform', seed)`
+
+Here X is the covariates and y is the dependent variable.
+
+The samplesize determine the size of random subsample one would like to use. The larger the size, the more accurate the results at a cost of speed.
+
+Type can be defined as "Uniform" or "Lev" which is short for leverage method.
+
+Seed define the random number one would like to use and the default is the default option in r.
+
+Follows is an example
+
+```{}
+n=500
+x=rt(n,6)
+e=rnorm(n,mean=0,sd=1)
+y=-x+e
+X=matrix(1,nrow=n,ncol=2)
+X[,2]=x
+beta=algoleverage(X,y,50,seed=33)
+beta1=algoleverage(X,y,50,Type="Lev",seed=33)
+```
+
