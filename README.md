@@ -11,7 +11,7 @@ library(~)
 
 replace ~ with algoleverage, elnetcoord or solveols
 
-To read the vignette, using the command:
+To read the vignette, please find within each folder and use the following command:
 
 vignette('~')
 
