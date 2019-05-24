@@ -1,14 +1,12 @@
 #' Solve linear system
 #'
-#' Solve linear system \code{Ax = b} using iteration methods Jacobi, GS and parallel Jacobi.
+#' Solve linear system \code{Ax = b} using iteration methods Jacobi, Gauss Seidl and parallel Jacobi.
 #'
 #' @param A Matrix.
 #' @param b Vector. Its dimension should match that of matrix \code{A}.
 #' @param c Number of cores used in parallel computation.
-#' @param type Type of iteration method, 'GS' means Gauss-Seidel,
+#' @param type Type of iteration method, 'GS' means Gauss-Seidel and "Jacobi" for Jacobi
 #' @param iter Number of iterations in the calculation.
-#' 'Jacobi' means Jacobi. Default is 'GS'.
-#' @param iter Number of iterations in the calculation. Default is 1000.
 #'
 #' @return The solution vector \code{x} for linear system \code{Ax = b}.
 #' @export
@@ -23,7 +21,7 @@ solveols <- function(A,b,iter,c=1,type="GS"){
       for (k in 1:n_row){
         x_GS[k]=(b[k]-A[k,]%*%x_GS+A[k,k]*x_GS[k])/A[k,k]
       }
-      x_GS[!is.finite(x)] <- -1e+308
+      x_GS[!is.finite(x_GS)] <- -1e+308
 
     }
     x_GS
@@ -39,7 +37,7 @@ solveols <- function(A,b,iter,c=1,type="GS"){
       xrow=x_J[-j,]
       x_J[j]=(b[j]-Arow%*%xrow)/A[j,j]
     }
-    x_J[!is.finite(x)] <- -1e+308
+    x_J[!is.finite(x_J)] <- -1e+308
   }
   x_J
 }
@@ -48,7 +46,6 @@ solveols <- function(A,b,iter,c=1,type="GS"){
 
 
 parallel <-function(A,b,c,iter){
-  require(doParallel)
   cl <- makeCluster(c)
   registerDoParallel(cl)
   n_row=nrow(A)
@@ -61,7 +58,7 @@ parallel <-function(A,b,c,iter){
       x_JP[j]=(b[j]-Arow%*%xrow)/A[j,j]
     }
     x_JP=unlist(outlist)
-    x_JP[!is.finite(x)] <- -1e+308
+    x_JP[!is.finite(x_JP)] <- -1e+308
 
   }
   x_JP

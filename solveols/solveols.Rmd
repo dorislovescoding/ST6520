@@ -1,0 +1,24 @@
+---
+title: "Solveols"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Solve for linear Equation (solveols)
+
+Here the objective function is $Ax=b$ and we would like to solve for x using Gauss-Seidel, Jacobi or Parellel Jacobi. The function is in the following form:
+
+`solveols(A, b, iter, type ='GS', c=1)`
+
+Here A needs to be invertible.
+
+Type can be defined as "GS" or "Jacobi"
+
+The variable `c` determines the number of cores to be used in the parallel realization of Jacobi methods and the default is 1.
+
+Here we need to make sure that Gauss-Seidel or Jacobi converge. Otherwise, after many iternation it would show the maximum number written in the code.
+
+
